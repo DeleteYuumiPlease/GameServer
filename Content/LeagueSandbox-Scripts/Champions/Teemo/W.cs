@@ -40,7 +40,7 @@ namespace Spells
 
         public void ApplyEffects(IObjAiBase owner, IAttackableUnit target, ISpell spell, ISpellMissile missile)
         {
-         
+
         }
 
         public void OnSpellChannel(ISpell spell)
