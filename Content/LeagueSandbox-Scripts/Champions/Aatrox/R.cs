@@ -60,6 +60,7 @@ namespace Spells
             {
                 var damage = 200 + (100 * (spell.CastInfo.SpellLevel - 1)) + (c.Stats.AbilityPower.Total);
 
+
                 var units = GetUnitsInRange(c.Position, 550f, true);
                 for (int i = 0; i < units.Count; i++)
                 {

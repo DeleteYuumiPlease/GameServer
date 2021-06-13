@@ -15,7 +15,7 @@ namespace Spells
         {
             TriggersSpellCasts = true
             // TODO
-        };
+        };  
 
         public void OnActivate(IObjAiBase owner, ISpell spell)
         {
