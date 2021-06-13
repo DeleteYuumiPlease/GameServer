@@ -10,17 +10,28 @@ using LeagueSandbox.GameServer.API;
 
 namespace Spells
 {
-    public class MoveQuick : ISpellScript
+    public class ToxicShot : ISpellScript
     {
         public ISpellScriptMetadata ScriptMetadata { get; private set; } = new SpellScriptMetadata()
         {
-            TriggersSpellCasts = true
+            TriggersSpellCasts = false
+            // doesent work yet
         };
 
         public void OnActivate(IObjAiBase owner, ISpell spell)
         {
-            //passive MS?
-            //AddBuff("MoveQuickPassive", 1.0f, 1, spell, owner, owner);
+            ApiEventManager.OnLaunchAttack.AddListener(this, owner, Poison, false);
+        }
+        private void Poison(ISpell target) 
+        {
+            var targets = target.CastInfo.Targets;
+            if (target.CastInfo.IsAutoAttack)
+            {
+                foreach (IAttackableUnit unit in targets)
+                {
+                    //unit.AddBuff();
+                }
+            }
         }
 
         public void OnDeactivate(IObjAiBase owner, ISpell spell)
@@ -29,15 +40,7 @@ namespace Spells
 
         public void OnSpellPreCast(IObjAiBase owner, ISpell spell, IAttackableUnit target, Vector2 start, Vector2 end)
         {
-            AddBuff("MoveQuick", 3.0f, 1, spell, target, owner);
-            //TODO: real teemo W anim
-            var p1 = AddParticleTarget(owner, owner, "Global_SS_Ghost.troy", owner);
-            var p2 = AddParticleTarget(owner, owner, "Global_SS_Ghost_cas.troy", owner);
-            CreateTimer(3.0f, () =>
-            {
-                RemoveParticle(p1);
-                RemoveParticle(p2);
-            });
+            
         }
 
         public void OnSpellCast(ISpell spell)
@@ -50,7 +53,7 @@ namespace Spells
 
         public void ApplyEffects(IObjAiBase owner, IAttackableUnit target, ISpell spell, ISpellMissile missile)
         {
-         
+
         }
 
         public void OnSpellChannel(ISpell spell)

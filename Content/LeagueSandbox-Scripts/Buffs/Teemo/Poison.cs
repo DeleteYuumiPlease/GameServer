@@ -5,11 +5,11 @@ using GameServerCore.Domain.GameObjects.Spell;
 using LeagueSandbox.GameServer.GameObjects.Stats;
 using GameServerCore.Scripting.CSharp;
 
-namespace MoveQuick
+namespace Poison
 {
-    internal class MoveQuick : IBuffGameScript
-{
-        public BuffType BuffType => BuffType.HASTE;
+    internal class Poison : IBuffGameScript
+    {
+        public BuffType BuffType => BuffType.POISON;
 
         public BuffAddType BuffAddType => BuffAddType.REPLACE_EXISTING;
 
@@ -19,11 +19,14 @@ namespace MoveQuick
 
         public IStatsModifier StatsModifier { get; private set; } = new StatsModifier();
 
-        //TODO: particles..?
         public void OnActivate(IAttackableUnit unit, IBuff buff, ISpell ownerSpell)
         {
-            StatsModifier.MoveSpeed.PercentBonus += (12f + ownerSpell.CastInfo.SpellLevel * 8) / 100f;
-            unit.AddStatModifier(StatsModifier);
+            var damage = 6 * ownerSpell.CastInfo.SpellLevel + ownerSpell.CastInfo.Owner.Stats.AbilityPower.Total * 0.3f;
+            unit.TakeDamage(ownerSpell.CastInfo.Owner, damage, DamageType.DAMAGE_TYPE_MAGICAL, DamageSource.DAMAGE_SOURCE_PROC, false);
+        }
+        public void OnTakeDamage(IAttackableUnit unit, IAttackableUnit source)
+        {
+
         }
 
         public void OnDeactivate(IAttackableUnit unit, IBuff buff, ISpell ownerSpell)
