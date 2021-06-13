@@ -10,7 +10,7 @@ namespace Blind
         public BuffType BuffType => BuffType.BLIND;
         public BuffAddType BuffAddType => BuffAddType.REPLACE_EXISTING;
         public int MaxStacks => 1;
-        public bool IsHidden => true;
+        public bool IsHidden => false;
 
         public IStatsModifier StatsModifier { get; private set; }
 

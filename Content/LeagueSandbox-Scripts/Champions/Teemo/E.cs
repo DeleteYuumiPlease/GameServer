@@ -20,7 +20,8 @@ namespace Spells
 
         public void OnActivate(IObjAiBase owner, ISpell spell)
         {
-            ApiEventManager.OnLaunchAttack.AddListener(this, owner, Poison, false);
+            //this shit procs even if the skill isnt learned, which is dumb.
+            //ApiEventManager.OnLaunchAttack.AddListener(owner, owner, Poison, false);
         }
         private void Poison(ISpell target) 
         {

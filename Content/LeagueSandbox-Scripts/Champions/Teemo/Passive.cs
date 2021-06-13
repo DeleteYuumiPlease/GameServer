@@ -1,0 +1,61 @@
+﻿using GameServerCore.Domain.GameObjects;
+using LeagueSandbox.GameServer.Scripting.CSharp;
+using GameServerCore.Domain.GameObjects.Spell;
+using GameServerCore.Domain.GameObjects.Spell.Missile;
+using System.Numerics;
+using GameServerCore.Scripting.CSharp;
+using LeagueSandbox.GameServer.API;
+
+namespace Spells
+{
+    public class GuerillaWarfare : ISpellScript
+    {
+        public ISpellScriptMetadata ScriptMetadata => new SpellScriptMetadata()
+        {
+            // TODO
+        };
+
+        public void OnActivate(IObjAiBase owner, ISpell spell)
+        {
+            var moved = owner.IsMovementUpdated();
+            if (!moved)
+            {
+                
+            }
+        }
+
+        public void OnDeactivate(IObjAiBase owner, ISpell spell)
+        {
+        }
+
+
+        public void OnSpellPreCast(IObjAiBase owner, ISpell spell, IAttackableUnit target, Vector2 start, Vector2 end)
+        {
+        }
+
+        public void OnSpellCast(ISpell spell)
+        {
+        }
+
+        public void OnSpellPostCast(ISpell spell)
+        {
+        }
+
+        public void OnSpellChannel(ISpell spell)
+        {
+        }
+
+        public void OnSpellChannelCancel(ISpell spell)
+        {
+        }
+
+        public void OnSpellPostChannel(ISpell spell)
+        {
+        }
+
+        public void OnUpdate(float diff)
+        {
+        }
+    }
+}
+
